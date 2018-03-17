@@ -71,7 +71,7 @@
         background-color: #052F3F;
         transition: all 0.3s ease-in-out;
         opacity: 0.8;
-        width: 200px;
+        width: 350px;
         font-size: 20px;
     }
 
