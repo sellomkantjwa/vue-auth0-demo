@@ -13,8 +13,7 @@
                 {{isRefreshingToken? "Refreshing tokens... ":'Simulate imminent token expiry'}}
             </button>
             <div class="simulate-explanation">"Simulate imminent token expiry" simulates what happens when we are 10
-                minutes from an expiring token - Which is essentially refreshing our tokens and
-                resetting the time to expiry. Note that the token below also changes.
+                minutes from an expiring token.
             </div>
         </div>
         <div class="token">access token = {{accessToken}}</div>
@@ -34,7 +33,7 @@
         },
         computed: {
             tokensExpiry() {
-                return this.$store.getters.tokensExpiry ? formatDate(this.$store.getters.tokensExpiry, "hh:mm:ss") : "";
+                return this.$store.getters.tokensExpiry ? formatDate(this.$store.getters.tokensExpiry, "HH:mm:ss") : "";
             },
             accessToken() {
                 return this.$store.getters.accessToken;
