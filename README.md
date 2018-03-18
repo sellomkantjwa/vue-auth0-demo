@@ -1,18 +1,3 @@
-# vue-auth0-demo
+[Demo](http://vue-auth0-demo.s3-website.eu-central-1.amazonaws.com)
 
-> A Vue.js project
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+This demo is a supporting resource for the article[Managing User Session And Refreshing Auth0 Tokens In a Vuejs Application](https://medium.com/@giza182/managing-user-session-and-refreshing-auth0-tokens-in-a-vuejs-application-65eb29c309bc). It demonstrates how to manage and refresh auth0 tokens unobtrusively and without using a refresh token.
