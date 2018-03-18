@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="wrapper" v-show="tokensExpiry!== 'Invalid Date'">
         <section>
             Your access token will expire at
             <br/>
@@ -34,7 +34,7 @@
         },
         computed: {
             tokensExpiry() {
-                return formatDate(this.$store.getters.tokensExpiry, "hh:mm:ss");
+                return this.$store.getters.tokensExpiry ? formatDate(this.$store.getters.tokensExpiry, "hh:mm:ss") : "";
             },
             accessToken() {
                 return this.$store.getters.accessToken;

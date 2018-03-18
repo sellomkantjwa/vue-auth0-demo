@@ -45,7 +45,9 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env': {
                 DEMO_AUTH0_CLIENT_ID: JSON.stringify(process.env.DEMO_AUTH0_CLIENT_ID),
-                DEMO_AUTH0_DOMAIN: JSON.stringify(process.env.DEMO_AUTH0_DOMAIN)
+                DEMO_AUTH0_DOMAIN: JSON.stringify(process.env.DEMO_AUTH0_DOMAIN),
+                LOGIN_REDIRECT_URI: JSON.stringify(process.env.LOGIN_REDIRECT_URI),
+                LOGOUT_REDIRECT_URI: JSON.stringify(process.env.LOGOUT_REDIRECT_URI)
             }
         }),
     ],

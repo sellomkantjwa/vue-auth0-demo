@@ -7,22 +7,31 @@ import differenceInMinutes from "date-fns/difference_in_minutes";
 import differenceInMilliSeconds from "date-fns/difference_in_milliseconds";
 import {WebAuth} from "auth0-js";
 
+
+let refreshTimeout = null;
 const auth0 = new WebAuth({
     responseType: "token id_token",
     domain: process.env.DEMO_AUTH0_DOMAIN,
     clientID: process.env.DEMO_AUTH0_CLIENT_ID,
-    redirectUri: "http://localhost:8080/login-callback"
+    redirectUri: process.env.LOGIN_REDIRECT_URI || "http://localhost:8080/login-callback"
 });
 
 export {auth0};
 export {initSession};
 export {refreshTokens};
-
+export {logout};
 export default {
     initSession,
     refreshTokens,
     auth0,
 };
+
+function logout() {
+    auth0.logout({returnTo: process.env.LOGOUT_REDIRECT_URI || "http://localhost:8080"});
+    Store.commit("update_auth_tokens", {}); //clear our tokens
+    clearTimeout(refreshTimeout);
+    refreshTimeout = null;
+}
 
 
 function initSession() {
@@ -42,7 +51,7 @@ function initSession() {
         }
 
         console.log("Token Ok. Expiring at " + tokenExpiryDate);
-        setTimeout(refreshTokens, differenceInMilliSeconds(tenMinutesBeforeExpiry, now));
+        refreshTimeout = setTimeout(refreshTokens, differenceInMilliSeconds(tenMinutesBeforeExpiry, now));
     });
 }
 
@@ -56,7 +65,7 @@ function refreshTokens() {
             const tokenExpiryDate = addSeconds(new Date(), authResult.expiresIn);
             const tenMinutesBeforeExpiry = subtractMinutes(tokenExpiryDate, 10);
             const now = new Date();
-            setTimeout(refreshTokens, differenceInMilliSeconds(tenMinutesBeforeExpiry, now));
+            refreshTimeout = setTimeout(refreshTokens, differenceInMilliSeconds(tenMinutesBeforeExpiry, now));
             resolve();
         });
     });

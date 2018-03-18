@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <navbar/>
         <h1>Vue/Auth0 Session and Token Management</h1>
         <router-view/>
     </div>
@@ -10,8 +11,10 @@
     import Router from "./router";
     import Store from "./store";
     import {initSession} from "./session-manager";
+    import Navbar from "./components/Navbar";
 
     export default {
+        components: {Navbar},
         name: 'app',
         data() {
             return {};
@@ -39,7 +42,7 @@
 
     body {
         margin: 0;
-        background-color: rgb(0, 105, 146);
+        background-color: #006992;
     }
 
     h1, h2 {
